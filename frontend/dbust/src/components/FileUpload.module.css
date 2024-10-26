@@ -26,8 +26,8 @@
   /* Responsive styles */
   @media (min-width: 768px) {
     .uploadIcon {
-      width: 480px; /* Larger size for desktop */
-      height: 480px;
+      width: 150px; /* Larger size for desktop */
+      height: 150px;
     }
   }
 
