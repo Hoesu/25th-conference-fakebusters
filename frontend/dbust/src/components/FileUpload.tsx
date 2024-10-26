@@ -2,46 +2,50 @@ import React, { useState, useCallback } from 'react';
 import styles from './FileUpload.module.css';
 
 interface FileUploadProps {
-  onFileUpload: (file: File) => void;
-}
-
-const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleDragEnter = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  }, []);
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  }, []);
-
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      onFileUpload(files[0]);
-    }
-  }, [onFileUpload]);
-
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      onFileUpload(files[0]);
-    }
-  }, [onFileUpload]);
+    onFileUpload: (file: File) => void;
+  }
+  
+  const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload }) => {
+    const [isDragging, setIsDragging] = useState(false);
+  
+    const handleDragEnter = useCallback((e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(true);
+    }, []);
+  
+    const handleDragLeave = useCallback((e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      // Only set isDragging to false if we're leaving the main drop area
+      if (e.currentTarget === e.target) {
+        setIsDragging(false);
+      }
+    }, []);
+  
+    const handleDragOver = useCallback((e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(true);
+    }, []);
+  
+    const handleDrop = useCallback((e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+  
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
+        onFileUpload(files[0]);
+      }
+    }, [onFileUpload]);
+  
+    const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        onFileUpload(files[0]);
+      }
+    }, [onFileUpload]);
 
   return (
     <div 
