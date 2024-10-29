@@ -6,15 +6,18 @@ import "./globals.css";
 import { Roboto_Condensed } from 'next/font/google'
 
 const robotoCondensed = Roboto_Condensed({
-  weight: ['300', '400', '700'],  // Choose the weights you need
-  style: ['normal', 'italic'],    // Choose the styles you need
-  subsets: ['latin'],             // Choose the character subsets you need
+  weight: ['300', '400', '700'],  
+  style: ['normal', 'italic'],    
+  subsets: ['latin'],             
   variable: '--font-roboto-condensed',
 })
 
 export const metadata: Metadata = {
-  title: "Deepfake Detection",
+  title: "Deepfake Detector",
   description: "Detects possibility of forging for images.",
+  icons: {
+    icon: '/icon.png',
+  },
 };
 
 export default function RootLayout({
