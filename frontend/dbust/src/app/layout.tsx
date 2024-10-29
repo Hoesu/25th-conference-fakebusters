@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import Header from '../components/Header'
 import "./globals.css";
 
 
@@ -11,17 +11,6 @@ const robotoCondensed = Roboto_Condensed({
   subsets: ['latin'],             // Choose the character subsets you need
   variable: '--font-roboto-condensed',
 })
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Deepfake Detection",
@@ -35,7 +24,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={robotoCondensed.variable}>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
