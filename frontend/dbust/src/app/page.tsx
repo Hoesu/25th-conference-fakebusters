@@ -1,4 +1,3 @@
-// src/app/page.tsx
 'use client'
 
 import React, { useState } from 'react';
@@ -11,7 +10,7 @@ function simulateLongProcess(file: File): Promise<boolean> {
     console.log(`Processing file: ${file.name}, Size: ${file.size} bytes`);
     
     // Simulate a longer processing time (e.g., 5 seconds)
-    const processingTime = 5000; // 5 seconds
+    const processingTime = 5000;
 
     setTimeout(() => {
       console.log(`Finished processing: ${file.name}`);
@@ -28,14 +27,13 @@ export default function Home() {
 
   const handleFileUpload = async (file: File) => {
     setIsProcessing(true);
-    setResult(null); // Reset previous result
+    setResult(null);
 
     try {
       const processedResult = await simulateLongProcess(file);
       setResult(processedResult);
     } catch (error) {
       console.error("Error processing file:", error);
-      // Handle error (e.g., show error message to user)
     } finally {
       setIsProcessing(false);
     }
@@ -43,7 +41,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold mb-8">Deepfake Detector</h1>
+      <h1 className="text-5xl font-medium">Deepfake Detector</h1>
       <FileUpload onFileUpload={handleFileUpload} />
       {result !== null && <Result isTrue={result} />}
       {isProcessing && <ProcessingOverlay />}

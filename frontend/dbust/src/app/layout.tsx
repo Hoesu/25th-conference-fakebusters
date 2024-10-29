@@ -2,6 +2,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+
+import { Roboto_Condensed } from 'next/font/google'
+
+const robotoCondensed = Roboto_Condensed({
+  weight: ['300', '400', '700'],  // Choose the weights you need
+  style: ['normal', 'italic'],    // Choose the styles you need
+  subsets: ['latin'],             // Choose the character subsets you need
+  variable: '--font-roboto-condensed',
+})
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -20,16 +30,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={robotoCondensed.variable}>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
